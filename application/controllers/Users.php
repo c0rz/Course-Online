@@ -14,20 +14,24 @@ Class Users Extends REST_Controller {
         $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('user');
     }
-    
-    public function hello_get()
-    {
-            $tokenData = 'Hello World!';
-            
-            // Create a token
-            $token = AUTHORIZATION::generateToken($tokenData);
-            // Set HTTP status code
-            $status = parent::HTTP_OK;
-            // Prepare the response
-            $response = ['status' => $status, 'token' => $token];
-            // REST_Controller provide this method to send responses
-            $this->response($response, $status);
+
+    public function getUserProfile_get($id = 0) {
+        $data = $this->verify_request();
+        $status = parent::HTTP_OK;
+        $response = ['status' => $status, 'data' => $data];
+        $this->response($response, $status);
+        $con = $id?array('id' => $id):'';
+        $users = $this->user->getRows($con);
+        if(!empty($users)){
+            $this->response($users, REST_Controller::HTTP_OK);
+        }else{
+            $this->response([
+                'status' => FALSE,
+                'message' => 'No user was found.'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
     }
+
 
     function login_post(){
         $email = $this->post('email');
@@ -40,7 +44,7 @@ Class Users Extends REST_Controller {
             );
             $user = $this->user->getData($con);
             if ($user) {
-                $token = AUTHORIZATION::generateToken(['email_session' => $email]);
+                $token = AUTHORIZATION::generateToken($user);
                 $status = parent::HTTP_OK;
                 $this->response([
                     'status' => $status,
@@ -113,7 +117,25 @@ Class Users Extends REST_Controller {
         }
     }
 
-
-
+    private function verify_request()
+    {
+        $headers = $this->input->request_headers();
+        $token = $headers['Authorization'];
+        try {
+            $data = AUTHORIZATION::validateToken($token);
+            if ($data === false) {
+                $status = parent::HTTP_UNAUTHORIZED;
+                $response = ['status' => $status, 'msg' => 'Unauthorized Access!'];
+                $this->response($response, $status);
+                exit();
+            } else {
+                return $data;
+            }
+        } catch (Exception $e) {
+            $status = parent::HTTP_UNAUTHORIZED;
+            $response = ['status' => $status, 'msg' => 'Unauthorized Access! '];
+            $this->response($response, $status);
+        }
+    }
 }
 ?>
