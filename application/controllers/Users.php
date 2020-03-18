@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 require APPPATH . '/libraries/Format.php';
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+
 Class Users Extends REST_Controller {
     
     function __construct($config = 'rest') {
