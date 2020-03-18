@@ -15,7 +15,7 @@ Class Users Extends REST_Controller {
         $this->load->model('user');
     }
 
-    public function getUserProfile_get($id = 0) {
+    public function Profile_get($id = 0) {
         $data = $this->verify_request();
         $status = parent::HTTP_OK;
         $response = ['status' => $status, 'data' => $data];
@@ -96,7 +96,7 @@ Class Users Extends REST_Controller {
                 $insert = $this->user->insert($userData);
                 
                 if ($insert) {
-                    $token = AUTHORIZATION::generateToken(['email_session' => $email]);
+                    $token = AUTHORIZATION::generateToken($insert);
                     $status = parent::HTTP_OK;
                     $this->response([
                         'status' => $status,
