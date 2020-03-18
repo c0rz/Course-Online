@@ -9,8 +9,8 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
 Class Users Extends REST_Controller {
     
-    function __construct($config = 'rest') {
-        parent::__construct($config);
+    function __construct() {
+        parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('user');
     }
