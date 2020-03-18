@@ -7,9 +7,24 @@ Class Users Extends REST_Controller {
     
     function __construct($config = 'rest') {
         parent::__construct($config);
+        $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('user');
     }
     
+    public function hello_get()
+        {
+            $tokenData = 'Hello World!';
+            
+            // Create a token
+            $token = AUTHORIZATION::generateToken($tokenData);
+            // Set HTTP status code
+            $status = parent::HTTP_OK;
+            // Prepare the response
+            $response = ['status' => $status, 'token' => $token];
+            // REST_Controller provide this method to send responses
+            $this->response($response, $status);
+
+
     function login_post(){
         $email = $this->post('email');
         $password = $this->post('password');
@@ -91,5 +106,8 @@ Class Users Extends REST_Controller {
             ], 502);
         }
     }
+
+
+
 }
 ?>

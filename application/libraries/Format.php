@@ -379,9 +379,6 @@ class Format {
         // Close the handle
         fclose($handle);
 
-        // Convert UTF-8 encoding to UTF-16LE which is supported by MS Excel
-        $csv = mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
-
         return $csv;
     }
 
@@ -406,21 +403,21 @@ class Format {
 
         if (empty($callback) === TRUE)
         {
-            return json_encode($data, JSON_UNESCAPED_UNICODE);
+            return json_encode($data);
         }
 
         // We only honour a jsonp callback which are valid javascript identifiers
         elseif (preg_match('/^[a-z_\$][a-z0-9\$_]*(\.[a-z_\$][a-z0-9\$_]*)*$/i', $callback))
         {
             // Return the data as encoded json with a callback
-            return $callback.'('.json_encode($data, JSON_UNESCAPED_UNICODE).');';
+            return $callback.'('.json_encode($data).');';
         }
 
         // An invalid jsonp callback function provided.
         // Though I don't believe this should be hardcoded here
         $data['warning'] = 'INVALID JSONP CALLBACK: '.$callback;
 
-        return json_encode($data, JSON_UNESCAPED_UNICODE);
+        return json_encode($data);
     }
 
     /**
@@ -464,8 +461,8 @@ class Format {
     // INTERNAL FUNCTIONS
 
     /**
-     * @param string $data XML string
-     * @return array XML element object; otherwise, empty array
+     * @param $data XML string
+     * @return SimpleXMLElement XML element object; otherwise, empty array
      */
     protected function _from_xml($data)
     {
@@ -499,7 +496,7 @@ class Format {
     }
 
     /**
-     * @param string $data Encoded json string
+     * @param $data Encoded json string
      * @return mixed Decoded json string with leading and trailing whitespace removed
      */
     protected function _from_json($data)
@@ -508,7 +505,7 @@ class Format {
     }
 
     /**
-     * @param string $data Data to unserialize
+     * @param string Data to unserialized
      * @return mixed Unserialized data
      */
     protected function _from_serialize($data)
@@ -517,11 +514,12 @@ class Format {
     }
 
     /**
-     * @param string $data Data to trim leading and trailing whitespace
+     * @param $data Data to trim leading and trailing whitespace
      * @return string Data with leading and trailing whitespace removed
      */
     protected function _from_php($data)
     {
         return trim($data);
     }
+
 }
