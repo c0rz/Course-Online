@@ -64,8 +64,8 @@ Class Users Extends REST_Controller {
             } else {
                 // Insert user data
                 $userData = array(
-                    'nama_lengkap' => $first_name,
-                    'kesibukan' => $last_name,
+                    'nama_lengkap' => $nama_lengkap,
+                    'kesibukan' => $kesibukan,
                     'email' => $email,
                     'password' => md5($password)
                 );
