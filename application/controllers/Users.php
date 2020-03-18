@@ -12,7 +12,7 @@ Class Users Extends REST_Controller {
     }
     
     public function hello_get()
-        {
+    {
             $tokenData = 'Hello World!';
             
             // Create a token
@@ -23,7 +23,7 @@ Class Users Extends REST_Controller {
             $response = ['status' => $status, 'token' => $token];
             // REST_Controller provide this method to send responses
             $this->response($response, $status);
-
+    }
 
     function login_post(){
         $email = $this->post('email');
