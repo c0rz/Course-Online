@@ -15,9 +15,11 @@ Class Users Extends REST_Controller {
         $this->load->model('user');
     }
 
-    public function Profile_get($id = 0) {
+    public function Profile_get() {
         // Call the verification method and store the return value in the variable
         $data = $this->verify_request();
+        var_dump($data);
+        exit();
         // Send the return data as reponse
         $status = parent::HTTP_OK;
         $response = ['status' => $status, 'data' => $data];
