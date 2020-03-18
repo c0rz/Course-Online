@@ -92,11 +92,12 @@ Class Users Extends REST_Controller {
                 $insert = $this->user->insert($userData);
                 
                 if ($insert) {
+                    $token = AUTHORIZATION::generateToken(['email_session' => $email]);
+                    $status = parent::HTTP_OK;
                     $this->response([
-                        'status' => TRUE,
-                        'message' => 'The user has been added successfully.',
-                        'data' => $insert
-                    ], REST_Controller::HTTP_OK);
+                        'status' => $status,
+                        'access_token' => $token
+                    ], $status);
                 } else {
                     $this->response([
                         'status' => false,
