@@ -40,11 +40,12 @@ Class Users Extends REST_Controller {
             );
             $user = $this->user->getData($con);
             if ($user) {
+                $token = AUTHORIZATION::generateToken(['data_acc' => $user['data']]);
+                $status = parent::HTTP_OK;
                 $this->response([
-                    'status' => true,
-                    'message' => 'User login successful.',
-                    'data' => $user
-                ], REST_Controller::HTTP_OK);
+                    'status' => $status,
+                    'access_token' => $token
+                ], $status);
             } else {
                 $this->response([
                     'status' => false,
