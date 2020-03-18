@@ -41,4 +41,8 @@ class User extends CI_Model
 		return $result;
 	}
 
+    public function insert($data){
+            $insert = $this->db->insert($this->userTbl, $data);
+            return $insert?$this->db->insert_id():false;
+    }
 }
