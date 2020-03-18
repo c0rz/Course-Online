@@ -16,20 +16,12 @@ Class Users Extends REST_Controller {
     }
 
     public function Profile_get($id = 0) {
+        // Call the verification method and store the return value in the variable
         $data = $this->verify_request();
+        // Send the return data as reponse
         $status = parent::HTTP_OK;
         $response = ['status' => $status, 'data' => $data];
         $this->response($response, $status);
-        $con = $id?array('id' => $id):'';
-        $users = $this->user->getRows($con);
-        if(!empty($users)){
-            $this->response($users, REST_Controller::HTTP_OK);
-        }else{
-            $this->response([
-                'status' => FALSE,
-                'message' => 'No user was found.'
-            ], REST_Controller::HTTP_NOT_FOUND);
-        }
     }
 
 
