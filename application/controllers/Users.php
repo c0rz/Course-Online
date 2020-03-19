@@ -15,7 +15,7 @@ Class Users Extends REST_Controller {
         $this->load->model('user');
     }
 
-    public function index()
+    public function sendemail_post()
     {
       // Konfigurasi email
         $config = [
