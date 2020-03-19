@@ -15,7 +15,7 @@ Class Users Extends REST_Controller {
         $this->load->model('user');
     }
 
-    function sendMail() {
+    public function sendMail_post() {
         $ci = get_instance();
         $ci->load->library('email');
         $config['protocol'] = "smtp";
@@ -37,6 +37,7 @@ Class Users Extends REST_Controller {
         } else {
             show_error($this->email->print_debugger());
         }
+    }
 
     public function forget_post() {
         $email = $this->post('email');
