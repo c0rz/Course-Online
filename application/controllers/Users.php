@@ -53,7 +53,7 @@ Class Users Extends REST_Controller {
         if ($this->email->send()) {
             echo 'Sukses! email berhasil dikirim.';
         } else {
-            echo $this->email->send();
+            var_dump($this->email->send());
         }
     }
 
