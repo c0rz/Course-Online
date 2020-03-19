@@ -15,47 +15,28 @@ Class Users Extends REST_Controller {
         $this->load->model('user');
     }
 
-    public function sendemail_post()
-    {
-      // Konfigurasi email
-        $config = [
-            'mailtype'  => 'html',
-            'charset'   => 'utf-8',
-            'protocol'  => 'smtp',
-            'smtp_host' => 'smtp.gmail.com',
-            'smtp_user' => 'sinambelaalfredo@gmail.com',  // Email gmail
-            'smtp_pass'   => 'alfredo1999',  // Password gmail
-            'smtp_crypto' => 'ssl',
-            'smtp_port'   => 465,
-            'crlf'    => "\r\n",
-            'newline' => "\r\n"
-        ];
-
-        // Load library email dan konfigurasinya
-        $this->load->library('email', $config);
-
-        // Email dan nama pengirim
-        $this->email->from('no-reply@masrud.com', 'MasRud.com');
-
-        // Email penerima
-        $this->email->to('sinambelacornelius@domain.com'); // Ganti dengan email tujuan
-
-        // Lampiran email, isi dengan url/path file
-        $this->email->attach('https://masrud.com/content/images/20181215150137-codeigniter-smtp-gmail.png');
-
-        // Subject email
-        $this->email->subject('Kirim Email dengan SMTP Gmail CodeIgniter | MasRud.com');
-
-        // Isi email
-        $this->email->message("Ini adalah contoh email yang dikirim menggunakan SMTP Gmail pada CodeIgniter.<br><br> Klik <strong><a href='https://masrud.com/post/kirim-email-dengan-smtp-gmail' target='_blank' rel='noopener'>disini</a></strong> untuk melihat tutorialnya.");
-
-        // Tampilkan pesan sukses atau error
+    function sendMail() {
+        $ci = get_instance();
+        $ci->load->library('email');
+        $config['protocol'] = "smtp";
+        $config['smtp_host'] = "ssl://smtp.gmail.com";
+        $config['smtp_port'] = "465";
+        $config['smtp_user'] = "sinambelaalfredo@gmail.com";
+        $config['smtp_pass'] = "alfredo1999";
+        $config['charset'] = "utf-8";
+        $config['mailtype'] = "html";
+        $config['newline'] = "\r\n";
+        $ci->email->initialize($config);
+        $ci->email->from('hiherokueah@gmail.com', 'Your Name');
+        $list = array('sinambelacornelius@domain.com');
+        $ci->email->to($list);
+        $ci->email->subject('judul email');
+        $ci->email->message('isi email');
         if ($this->email->send()) {
-            echo 'Sukses! email berhasil dikirim.';
+            echo 'Email sent.';
         } else {
-            echo 'Error! email tidak dapat dikirim.';
+            show_error($this->email->print_debugger());
         }
-    }
 
     public function forget_post() {
         $email = $this->post('email');
