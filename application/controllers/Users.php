@@ -19,7 +19,7 @@ Class Users Extends REST_Controller {
     {
         $headers = $this->input->request_headers();
         var_dump($headers);
-        $token = $headers->Authorization;
+        $token = $headers[17]["Authorization"];
         var_dump($token);
         exit();
         try {
