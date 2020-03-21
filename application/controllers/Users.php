@@ -37,7 +37,7 @@ Class Users Extends REST_Controller {
         }
     }
 
-    public function forget_password_post() {
+    public function forget_passwordx_post() {
         $email = $this->post('email');
         if (!empty($email)) {
             $con['returnType'] = 'count';
@@ -50,8 +50,7 @@ Class Users Extends REST_Controller {
                 $response = ['status' => $status, 'message' => 'User Ditemukan!'];
                 $this->response($response, $status);
             } else {
-                $status = parent::HTTP_OK;
-                $response = ['status' => $status, 'message' => 'User Tidak Ditermukan!'];
+                $response = ['status' => false, 'message' => 'User Tidak Ditermukan'];
                 $this->response($response, $status);
             }
         } else {
