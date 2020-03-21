@@ -14,6 +14,27 @@ Class Users Extends REST_Controller {
         $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('user');
     }
+    
+    private function verify_request()
+    {
+        $headers = $this->input->request_headers();
+        $token = $headers['Authorization'];
+        try {
+            $data = AUTHORIZATION::validateToken($token);
+            if ($data === false) {
+                $status = parent::HTTP_UNAUTHORIZED;
+                $response = ['status' => $status, 'msg' => 'Unauthorized Access!'];
+                $this->response($response, $status);
+                exit();
+            } else {
+                return $data;
+            }
+        } catch (Exception $e) {
+            $status = parent::HTTP_UNAUTHORIZED;
+            $response = ['status' => $status, 'msg' => 'Unauthorized Access! '];
+            $this->response($response, $status);
+        }
+    }
 
     public function sendemail_post()
     {
@@ -133,27 +154,6 @@ Class Users Extends REST_Controller {
                 'status' => false,
                 'message' => 'Method POST (data kosong).'
             ], 502);
-        }
-    }
-
-    private function verify_request()
-    {
-        $headers = $this->input->request_headers();
-        $token = $headers['Authorization'];
-        try {
-            $data = AUTHORIZATION::validateToken($token);
-            if ($data === false) {
-                $status = parent::HTTP_UNAUTHORIZED;
-                $response = ['status' => $status, 'msg' => 'Unauthorized Access!'];
-                $this->response($response, $status);
-                exit();
-            } else {
-                return $data;
-            }
-        } catch (Exception $e) {
-            $status = parent::HTTP_UNAUTHORIZED;
-            $response = ['status' => $status, 'msg' => 'Unauthorized Access! '];
-            $this->response($response, $status);
         }
     }
 }
