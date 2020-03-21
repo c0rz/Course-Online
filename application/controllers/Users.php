@@ -12,7 +12,7 @@ Class Users Extends REST_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
-        $this->load->model('user');
+        $this->load->model('user', 'curl_api');
     }
 
     private function verify()
@@ -36,19 +36,6 @@ Class Users Extends REST_Controller {
         }
     }
 
-    public function sendemail_post()
-    {
-        $this->load->library('email');
-
-        $this->email->from('rplgdc@yukmulaicoding.com', 'RPLGDC');
-        $this->email->to('sinambelacornelius@gmail.com');
-
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-
-        var_dump($this->email->send());
-    }
-
     public function forget_password_post() {
         $email = $this->post('email');
         $con['returnType'] = 'count';
@@ -57,7 +44,13 @@ Class Users Extends REST_Controller {
         );
         $userCount = $this->user->getData($con);
         if ($userCount) {
-
+            $status = parent::HTTP_OK;
+            $response = ['status' => $status, 'message' => 'User Ditemukan!'];
+            $this->response($response, $status);
+        } else {
+            $status = parent::HTTP_OK;
+            $response = ['status' => $status, 'data' => 'User Tidak Ditermukan!'];
+            $this->response($response, $status);
         }
     }
     public function profile_post() {
