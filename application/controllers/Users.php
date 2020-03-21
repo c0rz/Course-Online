@@ -62,6 +62,8 @@ Class Users Extends REST_Controller {
     }
     public function profile_post() {
         $data = $this->verify_request();
+        var_dump($data);
+        exit();
         $status = parent::HTTP_OK;
         if ($status == 200) {
             $response = ['status' => $status, 'data' => $data];
