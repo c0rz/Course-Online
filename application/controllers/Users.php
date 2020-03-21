@@ -44,9 +44,9 @@ Class Users Extends REST_Controller {
         $status = parent::HTTP_OK;
         if ($status == 200) {
             $response = ['status' => $status, 'data' => $data];
-            $this->response($response, $status);
-        } else {
-            $response = ['status' => $status, 'data' => 'Unauthorized Access!'];
+            $this->response($response, $status)
+ ;       } else {
+            $response = ['status' => $status, 'data' => 'Format Error!'];
             $this->response($response, $status);
         }
     }
