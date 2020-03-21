@@ -49,7 +49,7 @@ Class Users Extends REST_Controller {
         var_dump($this->email->send());
     }
 
-    public function forget_post() {
+    public function forget_password_post() {
         $email = $this->post('email');
         $con['returnType'] = 'count';
         $con['conditions'] = array(
