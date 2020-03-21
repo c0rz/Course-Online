@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Curl_API extends CI_Model
+class Nembak extends CI_Model
 {
     public function postCURL($_url, $_param){
         $postData = '';

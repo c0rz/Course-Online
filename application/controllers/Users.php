@@ -12,7 +12,8 @@ Class Users Extends REST_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
-        $this->load->model(['user', 'curl_api']);
+        $this->load->model('user');
+        $this->load->model('nambak');
     }
 
     private function verify()
