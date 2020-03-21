@@ -12,7 +12,7 @@ Class Users Extends REST_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
-        $this->load->model('user', 'curl_api');
+        $this->load->model(['user', 'curl_api']);
     }
 
     private function verify()
@@ -55,7 +55,7 @@ Class Users Extends REST_Controller {
             }
         } else {
             $status = parent::HTTP_OK;
-            $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
+            $response = ['status' => false, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
         }
     }
