@@ -14,11 +14,11 @@ Class Users Extends REST_Controller {
         $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('user');
     }
-    
+
     private function verify_request()
     {
         $headers = $this->input->request_headers();
-        $token = $headers['Authorization'];
+        $token = $headers['authorization'];
         try {
             $data = AUTHORIZATION::validateToken($token);
             if ($data === false) {
