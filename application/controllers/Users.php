@@ -13,7 +13,7 @@ Class Users Extends REST_Controller {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('user');
-        $this->load->model('nambak');
+        $this->load->model('nembak');
     }
 
     private function verify()
