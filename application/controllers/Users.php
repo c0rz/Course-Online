@@ -15,7 +15,7 @@ Class Users Extends REST_Controller {
         $this->load->model('user');
     }
 
-    public function verify_post()
+    private function verify()
     {
         $headers = $this->input->request_headers();
         $token = $headers["Authorization"];
@@ -61,9 +61,7 @@ Class Users Extends REST_Controller {
         }
     }
     public function profile_post() {
-        $data = $this->verify_request();
-        var_dump($data);
-        exit();
+        $data = $this->verify();
         $status = parent::HTTP_OK;
         if ($status == 200) {
             $response = ['status' => $status, 'data' => $data];
