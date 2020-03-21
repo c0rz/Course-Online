@@ -23,7 +23,7 @@ Class Users Extends REST_Controller {
             $data = AUTHORIZATION::validateToken($token);
             if ($data === false) {
                 $status = parent::HTTP_UNAUTHORIZED;
-                $response = ['status' => $status, 'msg' => 'Unauthorized Access!'];
+                $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
                 $this->response($response, $status);
                 exit();
             } else {
@@ -31,25 +31,31 @@ Class Users Extends REST_Controller {
             }
         } catch (Exception $e) {
             $status = parent::HTTP_UNAUTHORIZED;
-            $response = ['status' => $status, 'msg' => 'Unauthorized Access! '];
+            $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
         }
     }
 
     public function forget_password_post() {
         $email = $this->post('email');
-        $con['returnType'] = 'count';
-        $con['conditions'] = array(
-            'email' => $email,
-        );
-        $userCount = $this->user->getData($con);
-        if ($userCount) {
-            $status = parent::HTTP_OK;
-            $response = ['status' => $status, 'message' => 'User Ditemukan!'];
-            $this->response($response, $status);
+        if (!empty($email)) {
+            $con['returnType'] = 'count';
+            $con['conditions'] = array(
+                'email' => $email,
+            );
+            $userCount = $this->user->getData($con);
+            if ($userCount) {
+                $status = parent::HTTP_OK;
+                $response = ['status' => $status, 'message' => 'User Ditemukan!'];
+                $this->response($response, $status);
+            } else {
+                $status = parent::HTTP_OK;
+                $response = ['status' => $status, 'message' => 'User Tidak Ditermukan!'];
+                $this->response($response, $status);
+            }
         } else {
             $status = parent::HTTP_OK;
-            $response = ['status' => $status, 'data' => 'User Tidak Ditermukan!'];
+            $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
         }
     }
@@ -60,7 +66,7 @@ Class Users Extends REST_Controller {
             $response = ['status' => $status, 'data' => $data];
             $this->response($response, $status)
  ;       } else {
-            $response = ['status' => $status, 'data' => 'Format Error!'];
+            $response = ['status' => false, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
         }
     }
@@ -92,7 +98,7 @@ Class Users Extends REST_Controller {
         } else {
             $this->response([
                 'status' => false,
-                'message' => 'Method POST (data kosong).'
+                'message' => 'Unauthorized Access!'
             ], 502);
         }
     }
@@ -145,7 +151,7 @@ Class Users Extends REST_Controller {
         } else {
             $this->response([
                 'status' => false,
-                'message' => 'Method POST (data kosong).'
+                'message' => 'Unauthorized Access!'
             ], 502);
         }
     }
