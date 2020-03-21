@@ -60,7 +60,7 @@ Class Users Extends REST_Controller {
 
         }
     }
-    public function Profile_get() {
+    public function profile_post() {
         $data = $this->verify_request();
         $status = parent::HTTP_OK;
         if ($status == 200) {
