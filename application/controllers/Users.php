@@ -39,6 +39,7 @@ Class Users Extends REST_Controller {
 
     public function forget_passwordx_post() {
         $email = $this->post('email');
+        $status = parent::HTTP_UNAUTHORIZED;
         if (!empty($email)) {
             $con['returnType'] = 'count';
             $con['conditions'] = array(
