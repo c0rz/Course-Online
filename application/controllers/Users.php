@@ -37,6 +37,14 @@ Class Users Extends REST_Controller {
         }
     }
 
+    public function change_info_post() {
+        $data = $this->verify();
+        $status = parent::HTTP_OK;
+        if ($status == 200) {
+            
+        }
+    }
+
     public function forget_passwordx_post() {
         $email = $this->post('email');
         $status = parent::HTTP_UNAUTHORIZED;
@@ -60,13 +68,14 @@ Class Users Extends REST_Controller {
             $this->response($response, $status);
         }
     }
+
     public function profile_post() {
         $data = $this->verify();
         $status = parent::HTTP_OK;
         if ($status == 200) {
             $response = ['status' => $status, 'data' => $data];
-            $this->response($response, $status)
- ;       } else {
+            $this->response($response, $status);
+        } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
         }
