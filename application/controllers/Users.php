@@ -20,6 +20,7 @@ Class Users Extends REST_Controller {
     {
         $headers = $this->input->request_headers();
         $token = $headers["Authorization"];
+        var_dump($token);
         if ($token) {
             $data = AUTHORIZATION::validateToken($token);
             if ($data === false) {
