@@ -19,8 +19,8 @@ Class Users Extends REST_Controller {
     private function verify()
     {
         $headers = $this->input->request_headers();
+        var_dump($headers);
         $token = $headers["Authorization"];
-        var_dump($token);
         if ($token) {
             $data = AUTHORIZATION::validateToken($token);
             if ($data === false) {
