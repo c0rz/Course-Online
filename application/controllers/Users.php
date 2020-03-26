@@ -41,7 +41,7 @@ Class Users Extends REST_Controller {
         $token = $headers["Authorization"];
         $status = parent::HTTP_OK;
         if ($token) {
-            $data = $this->verify();
+            $data = $this->verify_request();
             $status = parent::HTTP_OK;
             if ($status == 200) {
 
