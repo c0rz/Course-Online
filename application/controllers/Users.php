@@ -16,7 +16,7 @@ Class Users Extends REST_Controller {
         $this->load->model('nembak');
     }
 
-    private function verify()
+    private function verify_request()
     {
         $headers = $this->input->request_headers();
         $token = $headers["Authorization"];
@@ -39,10 +39,11 @@ Class Users Extends REST_Controller {
     public function change_info_post() {
         $headers = $this->input->request_headers();
         $token = $headers["Authorization"];
+        $status = parent::HTTP_OK;
         if ($token) {
             $data = $this->verify();
             $status = parent::HTTP_OK;
-            if ($data) {
+            if ($status == 200) {
 
             } else {
                 $response = ['status' => false, 'message' => 'Unauthorized Access!'];
