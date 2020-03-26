@@ -46,8 +46,8 @@ class User extends CI_Model
             return $insert?$this->db->insert_id():false;
     }
 
-    public function update($id_akun, $data){
-        $this->db->where('id_akun', $id_akun);
-        return $this->db->update('produk', $data);
+    public function update($data, $id){
+        $update = $this->db->update($this->userTbl, $data, array('id'=>$id));
+        return $update?true:false;
     }
 }
