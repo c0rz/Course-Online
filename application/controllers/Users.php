@@ -21,7 +21,7 @@ Class Users Extends REST_Controller {
         $headers = $this->input->request_headers();
         var_dump($headers);
         $token = $headers["Authorization"];
-        if ($token) {
+        try {
             $data = AUTHORIZATION::validateToken($token);
             if ($data === false) {
                 $status = parent::HTTP_UNAUTHORIZED;
@@ -31,32 +31,17 @@ Class Users Extends REST_Controller {
             } else {
                 return $data;
             }
-        } else {
+        } catch (Exception $e) {
             $status = parent::HTTP_UNAUTHORIZED;
             $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
         }
-        // try {
-        //     $data = AUTHORIZATION::validateToken($token);
-        //     if ($data === false) {
-        //         $status = parent::HTTP_UNAUTHORIZED;
-        //         $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
-        //         $this->response($response, $status);
-        //         exit();
-        //     } else {
-        //         return $data;
-        //     }
-        // } catch (Exception $e) {
-        //     $status = parent::HTTP_UNAUTHORIZED;
-        //     $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
-        //     $this->response($response, $status);
-        // }
     }
 
     public function change_info_post() {
         $data = $this->verify();
         $status = parent::HTTP_OK;
-        if ($status == 200) {
+        if ($data) {
 
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
