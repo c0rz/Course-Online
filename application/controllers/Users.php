@@ -39,7 +39,7 @@ Class Users Extends REST_Controller {
     public function change_info_post() {
         $headers = $this->input->request_headers();
         $status = parent::HTTP_OK;
-        if ($headers["Authorization"] == TRUE) {
+        if ($headers["Authorization"] != NULL) {
             $data = $this->verify_request();
             $status = parent::HTTP_OK;
             if ($status == 200) {
