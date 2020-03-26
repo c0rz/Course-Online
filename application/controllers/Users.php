@@ -40,6 +40,7 @@ Class Users Extends REST_Controller {
 
     public function change_info_put() {
         $data = $this->verify();
+        var_dump($data);
         if ($data) {
 
         } else {
