@@ -52,7 +52,7 @@ Class Users Extends REST_Controller {
                     $userData['nama_lengkap'] = $full_name;
                 }
                 if (!empty($kesibukan)) {
-                    $userData['last_name'] = $last_name;
+                    $userData['kesibukan'] = $kesibukan;
                 }
                 if (!empty($password) && !empty($password2)) {
                     if ($password == $password2) {
