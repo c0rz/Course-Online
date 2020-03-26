@@ -96,7 +96,7 @@ Class Users Extends REST_Controller {
                 'password' => md5($password)
             );
             $user = $this->user->getData($con);
-            var_dump($user->id_akun);
+            var_dump($user['id_akun']);
             exit();
             if ($user) {
                 $token = AUTHORIZATION::generateToken($user);
