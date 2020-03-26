@@ -75,10 +75,14 @@ Class Users Extends REST_Controller {
 
     public function profile_post() {
         $data = $this->verify();
-        $status = parent::HTTP_OK;
-        if ($status == 200) {
-            $response = ['status' => $status, 'data' => $data];
-            $this->response($response, $status);
+        if ($data) {
+            $con['returnType'] = 'single';
+            $con['conditions'] = array(
+                'email' => $email,
+                'password' => md5($password)
+            );
+            $user = $this->user->getData($con);
+            var_dump($data);
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
