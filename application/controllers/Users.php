@@ -16,40 +16,35 @@ Class Users Extends REST_Controller {
         $this->load->model('nembak');
     }
 
-    private function verify_request()
+    private function verify()
     {
         $headers = $this->input->request_headers();
-        $token = $headers["Authorization"];
-        try {
-            $data = AUTHORIZATION::validateToken($token);
-            if ($data === false) {
+        if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
+            $token = $headers["Authorization"];
+            try {
+                $data = AUTHORIZATION::validateToken($token);
+                if ($data === false) {
+                    $status = parent::HTTP_UNAUTHORIZED;
+                    $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
+                    $this->response($response, $status);
+                } else {
+                    return $data;
+                }
+            } catch (Exception $e) {
                 $status = parent::HTTP_UNAUTHORIZED;
                 $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
                 $this->response($response, $status);
-            } else {
-                return $data;
             }
-        } catch (Exception $e) {
-            $status = parent::HTTP_UNAUTHORIZED;
-            $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
-            $this->response($response, $status);
         }
     }
 
     public function change_info_post() {
-        $headers = $this->input->request_headers();
+        $data = $this->verify();
         $status = parent::HTTP_OK;
-        if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
-            $data = $this->verify_request();
-            $status = parent::HTTP_OK;
-            if ($status == 200) {
+        if ($data) {
 
-            } else {
-                $response = ['status' => false, 'message' => 'Unauthorized Access!'];
-                $this->response($response, $status);
-            }
         } else {
-            $response = ['status' => false, 'message' => 'BISA!'];
+            $response = ['status' => false, 'message' => 'Unauthorized Access!'];
             $this->response($response, $status);
         }
     }
