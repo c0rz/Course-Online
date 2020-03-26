@@ -151,7 +151,7 @@ Class Users Extends REST_Controller {
                     $date = new DateTime();
                     $token = AUTHORIZATION::generateToken(['data' => $insert, 'exp' => $date->getTimestamp() + 60*60*5]);
                     $this->response([
-                        'status' => $status,
+                        'status' => true,
                         'access_token' => $token
                     ], parent::HTTP_OK);
                 } else {
