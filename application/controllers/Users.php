@@ -40,8 +40,40 @@ Class Users Extends REST_Controller {
 
     public function change_info_put() {
         $data = $this->verify();
-        var_dump($data);
         if ($data) {
+            $private_id = $data->data;
+            $full_name = strip_tags($this->put('nama'));
+            $password = $this->put('password');
+            $password2 = $this->put('password-confirm');
+            $kesibukan = strip_tags($this->put('sibuk'));
+            if ((!empty($full_name) && !empty($kesibukan)) || (!empty($password) && !empty($password2))) {
+                $userData = array();
+                if (!empty($full_name)) {
+                    $userData['nama_lengkap'] = $full_name;
+                }
+                if (!empty($kesibukan)) {
+                    $userData['last_name'] = $last_name;
+                }
+                if (!empty($password) && !empty($password2)) {
+                    if ($password == $password2) {
+                        $userData['password'] = md5($password);
+                    } else {
+                        $response = ['status' => false, 'message' => 'Password not same.'];
+                        $this->response($response, parent::HTTP_OK);
+                    }
+                }
+                $update = $this->user->update($userData, $private_id);
+                if($update){
+                    $response = ['status' => true, 'message' => 'The user info has been updated successfully.'];
+                    $this->response($response, REST_Controller::HTTP_OK);
+                } else {
+                    $response = ['status' => false, 'message' => 'Unauthorized Access! [UPDATE]'];
+                    $this->response($response, parent::HTTP_OK);
+                }
+            } else {
+                $response = ['status' => false, 'message' => 'Unauthorized Access! [PUT]'];
+                $this->response($response, parent::HTTP_OK);
+            }
 
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
