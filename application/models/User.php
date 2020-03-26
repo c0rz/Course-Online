@@ -47,7 +47,7 @@ class User extends CI_Model
     }
 
     public function update($data, $id){
-        $update = $this->db->update($this->userTbl, $data, array('id'=>$id));
+        $update = $this->db->update($this->userTbl, $data, array('id_akun'=>$id));
         return $update?true:false;
     }
 }
