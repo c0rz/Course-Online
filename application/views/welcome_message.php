@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Course Online - RPL & GDC</title>
+        <link rel="icon" href="https://rplgdc.netlify.com/favicon.ico" type="image/x-icon">
         <style>
         body, html {
           height: 100%;
@@ -50,7 +52,7 @@
     <body>
         <div class="bgimg">
           <div class="topleft">
-            <p>Logo</p>
+            <p><img src="<?=base_url()?>/assets/index.png"></p>
           </div>
           <div class="middle">
             <h1>COMING SOON</h1>
