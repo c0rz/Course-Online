@@ -38,15 +38,15 @@ Class Users Extends REST_Controller {
         }
     }
 
-    public function change_info_put() {
+    public function change_info_post() {
         $data = $this->verify();
         if ($data) {
             $private_id = $data->data;
-            $full_name = $this->put('nama');
-            $password = $this->put('password');
-            $password2 = $this->put('password_confirm');
-            $kesibukan = strip_tags($this->put('sibuk'));
-            if ($full_name) {
+            $full_name = $this->post('nama');
+            $password = $this->post('password');
+            $password2 = $this->post('password_confirm');
+            $kesibukan = $this->post('sibuk');
+            if ((!empty($full_name) && !empty($kesibukan)) || (!empty($password) && !empty($password2))) {
                 $userData = array();
                 if (!empty($full_name)) {
                     $userData['nama_lengkap'] = $full_name;
