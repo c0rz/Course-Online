@@ -44,9 +44,9 @@ Class Users Extends REST_Controller {
             $private_id = $data->data;
             $full_name = strip_tags($this->put('nama'));
             $password = $this->put('password');
-            $password2 = $this->put('password-confirm');
+            $password2 = $this->put('password_confirm');
             $kesibukan = strip_tags($this->put('sibuk'));
-            if ((!empty($full_name) && !empty($kesibukan)) || (!empty($password) && !empty($password2))) {
+            if (!empty($full_name)) {
                 $userData = array();
                 if (!empty($full_name)) {
                     $userData['nama_lengkap'] = $full_name;
@@ -157,10 +157,7 @@ Class Users Extends REST_Controller {
         $email = strip_tags($this->post('email'));
         $password = $this->post('password');
         
-        // Validate the post data
         if(!empty($nama_lengkap) && !empty($kesibukan) && !empty($email) && !empty($password)) {
-            
-            // Check if the given email already exists
             $con['returnType'] = 'count';
             $con['conditions'] = array(
                 'email' => $email,
@@ -173,7 +170,6 @@ Class Users Extends REST_Controller {
                     'message' => 'Email sudah terdaftar.'
                 ], 502);
             } else {
-                // Insert user data
                 $userData = array(
                     'nama_lengkap' => $nama_lengkap,
                     'kesibukan' => $kesibukan,
