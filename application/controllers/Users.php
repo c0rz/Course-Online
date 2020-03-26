@@ -78,10 +78,11 @@ Class Users Extends REST_Controller {
         if ($data) {
             $con = array('id_akun' => $data->data);
             $user = $this->user->getData($con);
-            $this->response($user, $status);
+            $response = ['status' => true, 'data' => $user];
+            $this->response($response, parent::HTTP_OK);
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
-            $this->response($response, $status);
+            $this->response($response, parent::HTTP_OK);
         }
     }
 
