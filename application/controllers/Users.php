@@ -77,8 +77,7 @@ Class Users Extends REST_Controller {
         $data = $this->verify();
         if ($data) {
             $id_akun = $data["data"];
-            $con['returnType'] = 'single';
-            $con['conditions'] = ['id_akun' => $id_akun];
+            $con = $id?array('id' => $id):'';
             $user = $this->user->getData($con);
             var_dump($user);
         } else {
