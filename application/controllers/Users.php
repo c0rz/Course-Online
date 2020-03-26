@@ -76,12 +76,12 @@ Class Users Extends REST_Controller {
     public function profile_post() {
         $data = $this->verify();
         if ($data) {
-            // $con['returnType'] = 'single';
-            // $con['conditions'] = array(
-            //     'email' => $email,
-            //     'password' => md5($password)
-            // );
-            // $user = $this->user->getData($con);
+            $id_akun = $data['data'];
+            $con['returnType'] = 'single';
+            $con['conditions'] = array(
+                'id_akun' => $id_akun
+            );
+            $user = $this->user->getData($con);
             var_dump($data);
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
