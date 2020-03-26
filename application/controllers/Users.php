@@ -76,7 +76,6 @@ Class Users Extends REST_Controller {
     public function profile_post() {
         $data = $this->verify();
         if ($data) {
-            $id_akun = $data["data"];
             $con = $id?array('id' => $data->data):'';
             $user = $this->user->getData($con);
             var_dump($user);
