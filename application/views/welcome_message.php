@@ -52,15 +52,15 @@
     <body>
         <div class="bgimg">
           <div class="topleft">
-            <p><img src="<?=base_url()?>/assets/index.png"></p>
+            <p><img src="<?=base_url()?>/assets/index.png"> Course Online</p>
           </div>
           <div class="middle">
             <h1>COMING SOON</h1>
             <hr>
-            <p>35 days left</p>
+            <p>#KAU_MALAS_KAU_MISKIN</p>
           </div>
           <div class="bottomleft">
-            <p>Some text</p>
+            <p>&copy; 2020 - Course Online Team</p>
           </div>
         </div>
     </body>
