@@ -147,10 +147,9 @@ Class Users Extends REST_Controller {
                     'password' => md5($password)
                 );
                 $insert = json_decode($this->user->insert($userData));
-                var_dump($insert);
-                exit();
                 if ($insert) {
-                    $token = AUTHORIZATION::generateToken($insert);
+                    $date = new DateTime();
+                    $token = AUTHORIZATION::generateToken(['data' => $insert, 'exp' => $date->getTimestamp() + 60*60*5);
                     $status = parent::HTTP_OK;
                     $this->response([
                         'status' => $status,
