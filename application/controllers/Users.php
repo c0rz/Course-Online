@@ -38,14 +38,13 @@ Class Users Extends REST_Controller {
         }
     }
 
-    public function change_info_post() {
+    public function change_info_put() {
         $data = $this->verify();
-        $status = parent::HTTP_OK;
         if ($data) {
 
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
-            $this->response($response, $status);
+            $this->response($response, parent::HTTP_OK);
         }
     }
 
