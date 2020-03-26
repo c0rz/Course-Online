@@ -46,7 +46,7 @@ Class Users Extends REST_Controller {
             $password = $this->put('password');
             $password2 = $this->put('password_confirm');
             $kesibukan = strip_tags($this->put('sibuk'));
-            if (!empty($full_name)) {
+            if ($full_name) {
                 $userData = array();
                 if (!empty($full_name)) {
                     $userData['nama_lengkap'] = $full_name;
