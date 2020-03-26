@@ -42,7 +42,7 @@ Class Users Extends REST_Controller {
         $data = $this->verify();
         if ($data) {
             $private_id = $data->data;
-            $full_name = strip_tags($this->put('nama'));
+            $full_name = $this->put('nama');
             $password = $this->put('password');
             $password2 = $this->put('password_confirm');
             $kesibukan = strip_tags($this->put('sibuk'));
