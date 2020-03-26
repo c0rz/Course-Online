@@ -19,7 +19,6 @@ Class Users Extends REST_Controller {
     private function verify()
     {
         $headers = $this->input->request_headers();
-        var_dump($headers);
         $token = $headers["Authorization"];
         try {
             $data = AUTHORIZATION::validateToken($token);
@@ -27,7 +26,6 @@ Class Users Extends REST_Controller {
                 $status = parent::HTTP_UNAUTHORIZED;
                 $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
                 $this->response($response, $status);
-                exit();
             } else {
                 return $data;
             }
@@ -41,7 +39,7 @@ Class Users Extends REST_Controller {
     public function change_info_post() {
         $data = $this->verify();
         $status = parent::HTTP_OK;
-        if ($data) {
+        if ($data == 200) {
 
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
