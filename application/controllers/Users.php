@@ -96,6 +96,8 @@ Class Users Extends REST_Controller {
                 'password' => md5($password)
             );
             $user = $this->user->getData($con);
+            var_dump($user);
+            exit();
             if ($user) {
                 $token = AUTHORIZATION::generateToken($user);
                 $status = parent::HTTP_OK;
