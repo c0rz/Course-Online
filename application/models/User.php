@@ -18,8 +18,8 @@ class User extends CI_Model
                 $this->db->where($key,$value);
             }
         }
-		if (array_key_exists("id",$params)) {
-            $this->db->where('id',$params['id']);
+		if (array_key_exists("id_akun",$params)) {
+            $this->db->where('id_akun',$params['id']);
             $query = $this->db->get();
             $result = $query->row_array();
         } else {
@@ -44,5 +44,10 @@ class User extends CI_Model
     public function insert($data){
             $insert = $this->db->insert($this->userTbl, $data);
             return $insert?$this->db->insert_id():false;
+    }
+
+    public function update($id_akun, $data){
+        $this->db->where('id_akun', $id_akun);
+        return $this->db->update('produk', $data);
     }
 }
