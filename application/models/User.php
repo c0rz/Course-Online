@@ -19,7 +19,7 @@ class User extends CI_Model
             }
         }
 		if (array_key_exists("id_akun",$params)) {
-            $this->db->where('id_akun',$params['id']);
+            $this->db->where('id_akun',$params['id_akun']);
             $query = $this->db->get();
             $result = $query->row_array();
         } else {
