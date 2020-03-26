@@ -146,8 +146,9 @@ Class Users Extends REST_Controller {
                     'email' => $email,
                     'password' => md5($password)
                 );
-                $insert = $this->user->insert($userData);
-                
+                $insert = json_decode($this->user->insert($userData));
+                var_dump($insert);
+                exit();
                 if ($insert) {
                     $token = AUTHORIZATION::generateToken($insert);
                     $status = parent::HTTP_OK;
