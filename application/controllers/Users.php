@@ -41,7 +41,7 @@ Class Users Extends REST_Controller {
     public function change_info_post() {
         $data = $this->verify();
         $status = parent::HTTP_OK;
-        if ($data) {
+        if ($status == 200) {
 
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
