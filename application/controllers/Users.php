@@ -96,7 +96,7 @@ Class Users Extends REST_Controller {
                 'password' => md5($password)
             );
             $user = $this->user->getData($con);
-            var_dump($user);
+            var_dump($user->id_akun);
             exit();
             if ($user) {
                 $token = AUTHORIZATION::generateToken($user);
@@ -146,7 +146,8 @@ Class Users Extends REST_Controller {
                     'nama_lengkap' => $nama_lengkap,
                     'kesibukan' => $kesibukan,
                     'email' => $email,
-                    'password' => md5($password)
+                    'password' => md5($password),
+                    'level' => 'Member',
                 );
                 $insert = json_decode($this->user->insert($userData));
                 if ($insert) {
