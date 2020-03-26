@@ -96,10 +96,9 @@ Class Users Extends REST_Controller {
                 'password' => md5($password)
             );
             $user = $this->user->getData($con);
-            var_dump($user['id_akun']);
-            exit();
             if ($user) {
-                $token = AUTHORIZATION::generateToken($user);
+                $date = new DateTime();
+                $token = AUTHORIZATION::generateToken(['data' => $user['id_akun'], 'exp' => $date->getTimestamp() + 60*60*5]);
                 $status = parent::HTTP_OK;
                 $this->response([
                     'status' => $status,
