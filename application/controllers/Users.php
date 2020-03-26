@@ -149,12 +149,11 @@ Class Users Extends REST_Controller {
                 $insert = json_decode($this->user->insert($userData));
                 if ($insert) {
                     $date = new DateTime();
-                    $token = AUTHORIZATION::generateToken(['data' => $insert, 'exp' => $date->getTimestamp() + 60*60*5);
-                    $status = parent::HTTP_OK;
+                    $token = AUTHORIZATION::generateToken(['data' => $insert, 'exp' => $date->getTimestamp() + 60*60*5]);
                     $this->response([
                         'status' => $status,
                         'access_token' => $token
-                    ], $status);
+                    ], parent::HTTP_OK);
                 } else {
                     $this->response([
                         'status' => false,
