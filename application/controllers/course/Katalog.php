@@ -16,13 +16,18 @@ Class Katalog Extends REST_Controller {
         $this->load->model('REST');
     }
 
-    private function profile_post() {
+    private function level() {
         $data = $this->REST->verify();
         if ($data) {
             $con = array('id_akun' => $data->data);
             $user = $this->course->getData($con, 'account');
             var_dump($user);
         }
+    }
+
+    public function profile_post() {
+        $data = $this->level();
+        var_dump($data);
     }
 }
 ?>
