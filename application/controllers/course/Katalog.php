@@ -7,13 +7,12 @@ require APPPATH . '/libraries/Format.php';
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
-Class Users Extends REST_Controller {
+Class Katalog Extends REST_Controller {
     
     function __construct() {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
-        $this->load->model('user');
-        $this->load->model('nembak');
+        $this->load->model('course');
     }
 
     private function verify()
