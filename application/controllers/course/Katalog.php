@@ -13,11 +13,11 @@ Class Katalog Extends REST_Controller {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('course');
-        $this->load->model('check_jwt');
+        $this->load->model('REST');
     }
 
     public function profile_post() {
-        $data = $this->check_jwt->verify();
+        $data = $this->REST->verify();
         if ($data) {
             $con = array('id_akun' => $data->data);
             $user = $this->user->getData($con);
