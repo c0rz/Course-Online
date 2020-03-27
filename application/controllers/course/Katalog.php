@@ -29,6 +29,8 @@ Class Katalog Extends REST_Controller {
         }
     }
 
+
+
     public function add_katalog_post() {
         $data = $this->level();
         if ($data) {
@@ -51,7 +53,7 @@ Class Katalog Extends REST_Controller {
                 }
                 $insert = $this->course->insert($postData, 'katalog');
                 if ($insert) {
-                    $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Success Create!'];
+                    $response = ['status' => true, 'message' => 'Success Create!'];
                     $this->response($response, parent::HTTP_UNAUTHORIZED);
                 } else {
                     $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Insert fail!'];

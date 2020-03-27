@@ -6,19 +6,20 @@ class Course extends CI_Model
 	public function __construct() {
         parent::__construct();
         $this->load->database();
+        $this->userTbl = 'katalog';
     }
 
-	public function getData($params = array(), $database){
+	public function getData($params = array()){
 		$this->db->select('*');
-        $this->db->from($database);
+        $this->db->from($this->userTbl);
 
         if (array_key_exists("conditions",$params)) {
             foreach($params['conditions'] as $key => $value){
                 $this->db->where($key,$value);
             }
         }
-		if (array_key_exists("id_akun",$params)) {
-            $this->db->where('id_akun',$params['id_akun']);
+		if (array_key_exists("id_katalog",$params)) {
+            $this->db->where('id_katalog',$params['id_katalog']);
             $query = $this->db->get();
             $result = $query->row_array();
         } else {
@@ -40,13 +41,18 @@ class Course extends CI_Model
 		return $result;
 	}
 
-    public function insert($data, $database){
-            $insert = $this->db->insert($database, $data);
+    public function insert($data){
+            $insert = $this->db->insert($this->userTbl, $data);
             return $insert?$this->db->insert_id():false;
     }
 
-    public function update($data, $id, $database){
-        $update = $this->db->update($database, $data, array('id_akun'=>$id));
+    public function update($data, $id){
+        $update = $this->db->update($this->userTbl, $data, array('id_katalog'=>$id));
         return $update?true:false;
+    }
+
+    public function delete($id){
+        $delete = $this->db->delete($this->userTbl, array('id'=>$id));
+        return $delete?true:false;
     }
 }
