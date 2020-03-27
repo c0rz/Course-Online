@@ -16,14 +16,12 @@ Class Katalog Extends REST_Controller {
         $this->load->model('REST');
     }
 
-    public function profile_post() {
+    private function profile_post() {
         $data = $this->REST->verify();
         if ($data) {
-            $response = ['status' => true, 'data' => $data];
-            $this->response($response, parent::HTTP_OK);
-        } else {
-            $response = ['status' => false, 'message' => 'Unauthorized Access!'];
-            $this->response($response, parent::HTTP_OK);
+            $con = array('id_akun' => $data->data);
+            $user = $this->course->getData($con, 'account');
+            var_dump($user);
         }
     }
 }

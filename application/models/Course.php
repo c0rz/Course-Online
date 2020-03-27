@@ -6,12 +6,11 @@ class Course extends CI_Model
 	public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->userTbl = 'account';
     }
 
-	public function getData($params = array()){
+	public function getData($params = array(), $database){
 		$this->db->select('*');
-        $this->db->from($this->userTbl);
+        $this->db->from($database);
 
         if (array_key_exists("conditions",$params)) {
             foreach($params['conditions'] as $key => $value){
@@ -41,13 +40,13 @@ class Course extends CI_Model
 		return $result;
 	}
 
-    public function insert($data){
-            $insert = $this->db->insert($this->userTbl, $data);
+    public function insert($data, $database){
+            $insert = $this->db->insert($database, $data);
             return $insert?$this->db->insert_id():false;
     }
 
-    public function update($data, $id){
-        $update = $this->db->update($this->userTbl, $data, array('id_akun'=>$id));
+    public function update($data, $id, $database){
+        $update = $this->db->update($database, $data, array('id_akun'=>$id));
         return $update?true:false;
     }
 }
