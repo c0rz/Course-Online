@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Course extends CI_Model
+class Check_JWT extends CI_Model
 {
 	public function __construct() {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);
     }
 
-    private function verify()
+    public function verify()
     {
         $headers = $this->input->request_headers();
         if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
@@ -29,3 +29,4 @@ class Course extends CI_Model
             }
         }
     }
+}
