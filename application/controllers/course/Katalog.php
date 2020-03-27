@@ -19,9 +19,7 @@ Class Katalog Extends REST_Controller {
     public function profile_post() {
         $data = $this->REST->verify();
         if ($data) {
-            $con = array('id_akun' => $data->data);
-            $user = $this->user->getData($con);
-            $response = ['status' => true, 'data' => $user];
+            $response = ['status' => true, 'data' => $data];
             $this->response($response, parent::HTTP_OK);
         } else {
             $response = ['status' => false, 'message' => 'Unauthorized Access!'];
