@@ -37,8 +37,24 @@ Class Katalog Extends REST_Controller {
             $pembimbing = strip_tags($this->post('narasumber'));
             $isi = strip_tags($this->post('text'));
             $url_ex = strip_tags($this->post('url_video'));
-            if(!empty($kategori) && !empty($judul) && !empty($pembimbing) && !empty($isi)) {
-
+            if (!empty($kategori) && !empty($judul) && !empty($pembimbing) && !empty($isi)) {
+                $postData = array(
+                    'kategori' => $kategori,
+                    'judul_materi' => $judul,
+                    'pembimbing' => $pembimbing,
+                    'isi_materi' => $isi,
+                );
+                if (!empty($url_ex)) {
+                    $postData['url_video'] = $kesibukan;
+                }
+                $insert = $this->course->insert($userData, 'katalog');
+                if ($insert) {
+                    $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Success Create!'];
+                    $this->response($response, parent::HTTP_UNAUTHORIZED);
+                } else {
+                    $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Insert fail!'];
+                    $this->response($response, parent::HTTP_UNAUTHORIZED);
+                }
             } else {
                 $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Empty Post!'];
                 $this->response($response, parent::HTTP_UNAUTHORIZED);
