@@ -45,7 +45,9 @@ Class Katalog Extends REST_Controller {
                     'isi_materi' => $isi,
                 );
                 if (!empty($url_ex)) {
-                    $postData['url_video'] = $kesibukan;
+                    $postData['url_video'] = $url_ex;
+                } else {
+                    $postData['url_video'] = " ";
                 }
                 $insert = $this->course->insert($postData, 'katalog');
                 if ($insert) {
