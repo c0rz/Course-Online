@@ -21,7 +21,7 @@ Class Katalog Extends REST_Controller {
         if ($data) {
             $con = array('id_akun' => $data->data);
             $user = $this->course->getData($con, 'account');
-            var_dump($user);
+            var_dump($user["level"]);
         }
     }
 
