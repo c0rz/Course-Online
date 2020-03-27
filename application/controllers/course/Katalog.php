@@ -21,13 +21,21 @@ Class Katalog Extends REST_Controller {
         if ($data) {
             $con = array('id_akun' => $data->data);
             $user = $this->course->getData($con, 'account');
-            var_dump($user["level"]);
+            if ($user["level"] == "Admin") {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    public function profile_post() {
+    public function add_katalog_post() {
         $data = $this->level();
-        var_dump($data);
+        if ($data) {
+            echo "asek";
+        } else {
+            echo "mpos";
+        }
     }
 }
 ?>
