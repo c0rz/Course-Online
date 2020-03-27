@@ -47,7 +47,7 @@ Class Katalog Extends REST_Controller {
                 if (!empty($url_ex)) {
                     $postData['url_video'] = $kesibukan;
                 }
-                $insert = $this->course->insert($userData, 'katalog');
+                $insert = $this->course->insert($postData, 'katalog');
                 if ($insert) {
                     $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Success Create!'];
                     $this->response($response, parent::HTTP_UNAUTHORIZED);
