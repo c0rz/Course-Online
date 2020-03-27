@@ -34,7 +34,8 @@ Class Katalog Extends REST_Controller {
         if ($data) {
             echo "asek";
         } else {
-            echo "mpos";
+            $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Unauthorized Access!'];
+            $this->response($response, parent::HTTP_UNAUTHORIZED);
         }
     }
 }
