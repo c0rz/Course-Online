@@ -35,7 +35,7 @@ Class Katalog Extends REST_Controller {
             $kategori = strip_tags($this->post('kategori'));
             $judul = strip_tags($this->post('judul'));
             $pembimbing = strip_tags($this->post('narasumber'));
-            $isi = strip_tags($this->post('text'));
+            $isi = $this->post('text');
             $url_ex = strip_tags($this->post('url_video'));
             if (!empty($kategori) && !empty($judul) && !empty($pembimbing) && !empty($isi)) {
                 $postData = array(
