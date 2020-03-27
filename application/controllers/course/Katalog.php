@@ -13,28 +13,7 @@ Class Katalog Extends REST_Controller {
         parent::__construct();
         $this->load->helper(['jwt', 'authorization']);  
         $this->load->model('course');
-    }
-
-    private function verify()
-    {
-        $headers = $this->input->request_headers();
-        if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
-            $token = $headers["Authorization"];
-            try {
-                $data = AUTHORIZATION::validateToken($token);
-                if ($data === false) {
-                    $status = parent::HTTP_UNAUTHORIZED;
-                    $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
-                    $this->response($response, $status);
-                } else {
-                    return $data;
-                }
-            } catch (Exception $e) {
-                $status = parent::HTTP_UNAUTHORIZED;
-                $response = ['status' => $status, 'message' => 'Unauthorized Access!'];
-                $this->response($response, $status);
-            }
-        }
+        $this->load->model('check_jwt');
     }
 
     public function change_info_post() {
