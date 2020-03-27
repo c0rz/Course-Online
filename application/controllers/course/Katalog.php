@@ -32,7 +32,17 @@ Class Katalog Extends REST_Controller {
     public function add_katalog_post() {
         $data = $this->level();
         if ($data) {
-            echo "asek";
+            $kategori = strip_tags($this->post('kategori'));
+            $judul = strip_tags($this->post('judul'));
+            $pembimbing = strip_tags($this->post('narasumber'));
+            $isi = strip_tags($this->post('text'));
+            $url_ex = strip_tags($this->post('url_video'));
+            if(!empty($kategori) && !empty($judul) && !empty($pembimbing) && !empty($isi)) {
+
+            } else {
+                $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Empty Post!'];
+                $this->response($response, parent::HTTP_UNAUTHORIZED);
+            }
         } else {
             $response = ['status' => parent::HTTP_UNAUTHORIZED, 'message' => 'Unauthorized Access!'];
             $this->response($response, parent::HTTP_UNAUTHORIZED);
